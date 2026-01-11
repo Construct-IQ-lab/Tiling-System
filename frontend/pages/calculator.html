@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiling System - Calculator</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand">🏗️ Tiling System</a>
+            <ul class="navbar-menu">
+                <li><a href="../index.html">Dashboard</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Tiling Calculator</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Area Calculation Section -->
+        <section class="calculator-section">
+            <h2>1. Calculate Area</h2>
+            <form id="area-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="length">Length</label>
+                        <input type="number" id="length" class="form-input" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="width">Width</label>
+                        <input type="number" id="width" class="form-input" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="unit">Unit</label>
+                        <select id="unit" class="form-select">
+                            <option value="meters">Meters</option>
+                            <option value="feet">Feet</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Calculate Area</button>
+            </form>
+            <div id="area-result" class="result-box hidden">
+                <h3>Area Result</h3>
+                <p><strong>Area:</strong> <span id="area-value"></span></p>
+            </div>
+        </section>
+
+        <!-- Material Calculation Section -->
+        <section class="calculator-section">
+            <h2>2. Calculate Materials</h2>
+            <form id="materials-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="mat-area">Area (m²)</label>
+                        <input type="number" id="mat-area" class="form-input" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="tile-width">Tile Width (cm)</label>
+                        <input type="number" id="tile-width" class="form-input" step="0.1" min="0" value="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="tile-height">Tile Height (cm)</label>
+                        <input type="number" id="tile-height" class="form-input" step="0.1" min="0" value="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="wastage">Wastage (%)</label>
+                        <input type="number" id="wastage" class="form-input" step="0.1" min="0" max="100" value="10" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Calculate Materials</button>
+            </form>
+            <div id="materials-result" class="result-box hidden">
+                <h3>Materials Needed</h3>
+                <p><strong>Tiles Needed:</strong> <span id="tiles-needed"></span></p>
+                <p><strong>Estimated Boxes:</strong> <span id="boxes-estimate"></span> (≈<span id="tiles-per-box"></span> tiles/box)</p>
+                <p><strong>Grout:</strong> <span id="grout-needed"></span> kg (<span id="grout-bags"></span> bags)</p>
+                <p><strong>Adhesive:</strong> <span id="adhesive-needed"></span> kg (<span id="adhesive-bags"></span> bags)</p>
+            </div>
+        </section>
+
+        <!-- Cost Calculation Section -->
+        <section class="calculator-section">
+            <h2>3. Calculate Cost</h2>
+            <form id="cost-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="cost-tiles">Tiles Needed</label>
+                        <input type="number" id="cost-tiles" class="form-input" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="tile-price">Price per Tile ($)</label>
+                        <input type="number" id="tile-price" class="form-input" step="0.01" min="0" value="2.50" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="cost-grout-bags">Grout Bags</label>
+                        <input type="number" id="cost-grout-bags" class="form-input" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="grout-price">Price per Bag ($)</label>
+                        <input type="number" id="grout-price" class="form-input" step="0.01" min="0" value="15.00" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="cost-adhesive-bags">Adhesive Bags</label>
+                        <input type="number" id="cost-adhesive-bags" class="form-input" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="adhesive-price">Price per Bag ($)</label>
+                        <input type="number" id="adhesive-price" class="form-input" step="0.01" min="0" value="25.00" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="labor-cost">Labor Cost ($)</label>
+                    <input type="number" id="labor-cost" class="form-input" step="0.01" min="0" value="0" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Calculate Cost</button>
+            </form>
+            <div id="cost-result" class="result-box hidden">
+                <h3>Cost Breakdown</h3>
+                <p><strong>Tiles Cost:</strong> $<span id="tiles-cost"></span></p>
+                <p><strong>Grout Cost:</strong> $<span id="grout-cost"></span></p>
+                <p><strong>Adhesive Cost:</strong> $<span id="adhesive-cost"></span></p>
+                <p><strong>Labor Cost:</strong> $<span id="labor-cost-result"></span></p>
+                <p><strong>Materials Total:</strong> $<span id="materials-cost"></span></p>
+                <p style="font-size: 1.2rem; margin-top: 1rem;"><strong>Total Cost:</strong> $<span id="total-cost"></span></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/calculator.js"></script>
+</body>
+</html>
