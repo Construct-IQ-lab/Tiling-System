@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiling System - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">🏗️ Tiling System</a>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="pages/projects.html">Projects</a></li>
+                <li><a href="pages/calculator.html">Calculator</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Tiling System</h1>
+            <p>Professional tiling project management and calculation tools</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 id="stat-total">0</h3>
+                <p>Total Projects</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="stat-active">0</h3>
+                <p>Active Projects</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="stat-completed">0</h3>
+                <p>Completed Projects</p>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="actions">
+            <a href="pages/calculator.html" class="btn btn-primary">Open Calculator</a>
+            <a href="pages/projects.html" class="btn btn-secondary">Manage Projects</a>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

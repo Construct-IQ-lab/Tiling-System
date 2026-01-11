@@ -4,9 +4,6 @@ from config import settings
 from database import init_db
 from routes import projects, calculations
 
-# Initialize database
-init_db()
-
 # Create FastAPI app
 app = FastAPI(
     title=settings.APP_NAME,
@@ -45,3 +42,13 @@ def read_root():
 def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "version": settings.VERSION}
+
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database on startup"""
+    try:
+        init_db()
+    except Exception as e:
+        print(f"Warning: Database initialization failed: {e}")
+        print("API will still run but database operations will fail")

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiling System - Projects</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand">🏗️ Tiling System</a>
+            <ul class="navbar-menu">
+                <li><a href="../index.html">Dashboard</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <div class="projects-header">
+                <h1>Projects</h1>
+                <button class="btn btn-primary" onclick="showCreateForm()">+ New Project</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div id="projects-grid" class="projects-grid">
+            <!-- Projects will be loaded here -->
+        </div>
+    </main>
+
+    <!-- Create Project Modal -->
+    <div id="create-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Project</h2>
+                <button class="modal-close" onclick="hideCreateForm()">&times;</button>
+            </div>
+            <form id="create-project-form">
+                <div class="form-group">
+                    <label class="form-label" for="project-name">Project Name *</label>
+                    <input type="text" id="project-name" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="project-description">Description</label>
+                    <textarea id="project-description" class="form-textarea"></textarea>
+                </div>
+                
+                <h3 class="mt-3 mb-2">Client Information</h3>
+                <div class="form-group">
+                    <label class="form-label" for="client-name">Client Name</label>
+                    <input type="text" id="client-name" class="form-input">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="client-contact">Client Contact</label>
+                    <input type="text" id="client-contact" class="form-input">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="client-address">Client Address</label>
+                    <textarea id="client-address" class="form-textarea"></textarea>
+                </div>
+                
+                <h3 class="mt-3 mb-2">Project Details</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="project-area">Area (m²)</label>
+                        <input type="number" id="project-area" class="form-input" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="project-budget">Budget ($)</label>
+                        <input type="number" id="project-budget" class="form-input" step="0.01" min="0">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="project-status">Status</label>
+                    <select id="project-status" class="form-select">
+                        <option value="planning">Planning</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                        <option value="archived">Archived</option>
+                    </select>
+                </div>
+                
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">Create Project</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideCreateForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/projects.js"></script>
+</body>
+</html>
