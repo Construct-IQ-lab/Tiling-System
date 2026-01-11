@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 from decimal import Decimal
 
 from database import get_db
@@ -37,6 +37,22 @@ def verify_project_access(project: Project, current_user: User) -> None:
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Access denied to this project"
         )
+
+
+def calculate_room_area(room_length: Optional[float], room_width: Optional[float]) -> Optional[float]:
+    """
+    Calculate room area from length and width.
+    
+    Args:
+        room_length: Length of the room
+        room_width: Width of the room
+        
+    Returns:
+        Calculated area or None if dimensions are missing
+    """
+    if room_length and room_width:
+        return room_length * room_width
+    return None
 
 
 # Pydantic models for request/response
@@ -174,10 +190,8 @@ async def create_project(
             )
         company_id = current_user.company_id
     
-    # Calculate room area if dimensions provided
-    room_area = None
-    if project_data.room_length and project_data.room_width:
-        room_area = project_data.room_length * project_data.room_width
+    # Calculate room area using helper function
+    room_area = calculate_room_area(project_data.room_length, project_data.room_width)
     
     project = Project(
         company_id=company_id,
@@ -256,16 +270,15 @@ async def update_project(
     for field, value in update_data.items():
         setattr(project, field, value)
     
-    # Recalculate room area if dimensions changed
+    # Recalculate room area if dimensions changed using helper function
     if "room_length" in update_data or "room_width" in update_data:
-        if project.room_length and project.room_width:
-            project.room_area = project.room_length * project.room_width
+        project.room_area = calculate_room_area(project.room_length, project.room_width)
     
     # Update completed_at timestamp if status changed to completed
     if project_data.status == ProjectStatus.COMPLETED and project.status != ProjectStatus.COMPLETED:
-        project.completed_at = datetime.utcnow()
+        project.completed_at = datetime.now(timezone.utc)
     
-    project.updated_at = datetime.utcnow()
+    project.updated_at = datetime.now(timezone.utc)
     db.commit()
     db.refresh(project)
     
