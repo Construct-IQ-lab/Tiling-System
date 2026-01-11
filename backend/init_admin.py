@@ -2,17 +2,37 @@
 """
 Database initialization script to create the initial admin user.
 Run this script after the database has been initialized.
+
+Usage:
+    python init_admin.py [--password PASSWORD]
+    
+If no password is provided, a default password will be used (not recommended for production).
 """
 
+import os
+import sys
+import secrets
+import string
 from sqlalchemy.orm import Session
 from database import SessionLocal, init_db
 from models.user import User, UserRole
 from services.auth_service import AuthService
 
 
-def create_admin_user(db: Session):
+def generate_random_password(length: int = 16) -> str:
+    """Generate a secure random password."""
+    alphabet = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(secrets.choice(alphabet) for i in range(length))
+    return password
+
+
+def create_admin_user(db: Session, password: str = None):
     """
     Create the initial admin user if it doesn't exist.
+    
+    Args:
+        db: Database session
+        password: Optional password. If not provided, uses environment variable or default.
     """
     # Check if admin user already exists
     admin_email = "admin@tilingsystem.com"
@@ -24,9 +44,18 @@ def create_admin_user(db: Session):
         print(f"  Active: {existing_admin.is_active}")
         return existing_admin
     
-    # Create new admin user
-    admin_password = "admin123"
-    password_hash = AuthService.get_password_hash(admin_password)
+    # Determine password from various sources
+    if password is None:
+        # Try environment variable first
+        password = os.environ.get("ADMIN_PASSWORD")
+        
+        if password is None:
+            # Use default password only in development
+            print("⚠️  WARNING: Using default password. Not recommended for production!")
+            print("   Set ADMIN_PASSWORD environment variable or use --password flag.")
+            password = "admin123"
+    
+    password_hash = AuthService.get_password_hash(password)
     
     admin_user = User(
         email=admin_email,
@@ -47,7 +76,7 @@ def create_admin_user(db: Session):
     print("="*60)
     print(f"\nAdmin Credentials:")
     print(f"  Email:    {admin_email}")
-    print(f"  Password: {admin_password}")
+    print(f"  Password: {password}")
     print(f"\n⚠️  IMPORTANT: Please change the password after first login!")
     print("="*60 + "\n")
     
@@ -58,6 +87,15 @@ def main():
     """
     Main function to initialize the database and create admin user.
     """
+    # Parse command line arguments
+    password = None
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--password" and len(sys.argv) > 2:
+            password = sys.argv[2]
+        elif sys.argv[1] in ["-h", "--help"]:
+            print(__doc__)
+            return
+    
     print("\n" + "="*60)
     print("Tiling System - Database Initialization")
     print("="*60 + "\n")
@@ -75,7 +113,7 @@ def main():
     print("Step 2: Creating admin user...")
     db = SessionLocal()
     try:
-        create_admin_user(db)
+        create_admin_user(db, password)
     except Exception as e:
         print(f"✗ Error creating admin user: {e}\n")
         db.rollback()

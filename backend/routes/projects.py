@@ -7,10 +7,36 @@ from decimal import Decimal
 
 from database import get_db
 from models.project import Project, ProjectStatus
+from models.company import Company
 from models.user import User, UserRole
 from middleware.auth import get_current_user
 
 router = APIRouter(prefix="/projects", tags=["Projects"])
+
+
+# Helper function for access control
+def verify_project_access(project: Project, current_user: User) -> None:
+    """
+    Verify that the current user has access to the project.
+    Raises HTTPException if access is denied.
+    
+    Args:
+        project: The project to check access for
+        current_user: The current authenticated user
+        
+    Raises:
+        HTTPException: If user doesn't have access to the project
+    """
+    # Admin users have access to all projects
+    if current_user.role == UserRole.ADMIN:
+        return
+    
+    # Regular users can only access projects in their company
+    if current_user.company_id != project.company_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Access denied to this project"
+        )
 
 
 # Pydantic models for request/response
@@ -28,6 +54,7 @@ class ProjectCreate(BaseModel):
     tile_price_per_unit: Optional[float] = Field(None, ge=0)
     wastage_percentage: float = Field(10.0, ge=0, le=100)
     budget: Optional[float] = Field(None, ge=0)
+    company_id: Optional[int] = Field(None, description="Company ID (required for admin users)")
 
 
 class ProjectUpdate(BaseModel):
@@ -119,19 +146,33 @@ async def create_project(
     """
     Create a new project.
     Company users can only create projects for their own company.
+    Admin users must specify a company_id in the request.
     """
     # Determine company_id
     if current_user.role == UserRole.ADMIN:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Admin users must specify a company when creating projects"
-        )
-    
-    if current_user.company_id is None:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="User is not associated with any company"
-        )
+        # Admin users must provide company_id
+        if not project_data.company_id:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Admin users must specify a company_id when creating projects"
+            )
+        company_id = project_data.company_id
+        
+        # Verify the company exists
+        company = db.query(Company).filter(Company.id == company_id).first()
+        if not company:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Company not found"
+            )
+    else:
+        # Non-admin users use their own company
+        if current_user.company_id is None:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="User is not associated with any company"
+            )
+        company_id = current_user.company_id
     
     # Calculate room area if dimensions provided
     room_area = None
@@ -139,7 +180,7 @@ async def create_project(
         room_area = project_data.room_length * project_data.room_width
     
     project = Project(
-        company_id=current_user.company_id,
+        company_id=company_id,
         created_by=current_user.id,
         name=project_data.name,
         description=project_data.description,
@@ -182,13 +223,8 @@ async def get_project(
             detail="Project not found"
         )
     
-    # Check access rights
-    if current_user.role != UserRole.ADMIN:
-        if current_user.company_id != project.company_id:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Access denied to this project"
-            )
+    # Check access rights using helper function
+    verify_project_access(project, current_user)
     
     return project
 
@@ -212,13 +248,8 @@ async def update_project(
             detail="Project not found"
         )
     
-    # Check access rights
-    if current_user.role != UserRole.ADMIN:
-        if current_user.company_id != project.company_id:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Access denied to this project"
-            )
+    # Check access rights using helper function
+    verify_project_access(project, current_user)
     
     # Update fields
     update_data = project_data.model_dump(exclude_unset=True)
@@ -259,13 +290,8 @@ async def delete_project(
             detail="Project not found"
         )
     
-    # Check access rights
-    if current_user.role != UserRole.ADMIN:
-        if current_user.company_id != project.company_id:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Access denied to this project"
-            )
+    # Check access rights using helper function
+    verify_project_access(project, current_user)
     
     db.delete(project)
     db.commit()
