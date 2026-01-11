@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports & Analytics - Tiling System</title>
+    <link rel="stylesheet" href="/frontend/css/common.css">
+    <link rel="stylesheet" href="/frontend/css/admin.css">
+</head>
+<body>
+    <!-- Admin Navigation -->
+    <nav class="navbar admin-navbar">
+        <div class="navbar-container">
+            <a href="/frontend/admin/index.html" class="navbar-brand">
+                🏗️ Tiling System Admin
+            </a>
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a href="/frontend/admin/index.html" class="navbar-link">Dashboard</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/companies.html" class="navbar-link">Companies</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/users.html" class="navbar-link">Users</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/projects.html" class="navbar-link">Projects</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/reports.html" class="navbar-link active">Reports</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-action="logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="admin-container">
+        <div class="page-header">
+            <h1 class="page-title">Reports & Analytics</h1>
+        </div>
+
+        <!-- Reports Placeholder -->
+        <div class="reports-placeholder">
+            <div class="placeholder-icon">📊</div>
+            <h2 class="placeholder-title">Reports Coming Soon</h2>
+            <p class="placeholder-text">
+                Comprehensive reporting and analytics features are in development.
+            </p>
+            
+            <div class="planned-reports">
+                <h3 style="text-align: center; margin-bottom: 20px;">Planned Reports</h3>
+                <ul>
+                    <li>Revenue by Company</li>
+                    <li>Projects by Status</li>
+                    <li>User Activity Report</li>
+                    <li>Material Usage Analysis</li>
+                    <li>Customer Satisfaction Metrics</li>
+                    <li>Financial Summary Reports</li>
+                    <li>Project Timeline Analysis</li>
+                    <li>Resource Utilization Report</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.navbar-toggle').addEventListener('click', function() {
+            document.querySelector('.navbar-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

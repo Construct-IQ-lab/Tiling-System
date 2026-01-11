@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - Tiling System</title>
+    <link rel="stylesheet" href="/frontend/css/common.css">
+    <link rel="stylesheet" href="/frontend/css/admin.css">
+</head>
+<body>
+    <!-- Admin Navigation -->
+    <nav class="navbar admin-navbar">
+        <div class="navbar-container">
+            <a href="/frontend/admin/index.html" class="navbar-brand">
+                🏗️ Tiling System Admin
+            </a>
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a href="/frontend/admin/index.html" class="navbar-link">Dashboard</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/companies.html" class="navbar-link">Companies</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/users.html" class="navbar-link active">Users</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/projects.html" class="navbar-link">Projects</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/reports.html" class="navbar-link">Reports</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-action="logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="admin-container">
+        <div class="page-header">
+            <h1 class="page-title">Users</h1>
+            <div class="page-actions">
+                <button class="btn btn-primary" onclick="showCreateUserForm()">
+                    + Add New User
+                </button>
+            </div>
+        </div>
+
+        <div class="form-error" id="error-message"></div>
+        <div class="form-success" id="success-message"></div>
+
+        <!-- Users Grid -->
+        <div class="users-grid" id="users-grid">
+            <!-- Users will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Create/Edit User Modal -->
+    <div class="modal" id="user-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="user-modal-title">Create New User</h2>
+                <button class="modal-close" data-action="close-user-modal">&times;</button>
+            </div>
+            <form id="user-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="user-company">Company</label>
+                        <select id="user-company" name="company_id">
+                            <option value="">None (Admin user)</option>
+                        </select>
+                        <small style="color: #666;">Select a company for company users, leave blank for admin</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user-email">Email *</label>
+                        <input 
+                            type="email" 
+                            id="user-email" 
+                            name="email" 
+                            required
+                            placeholder="user@example.com"
+                        >
+                    </div>
+
+                    <div class="form-group" id="password-group">
+                        <label for="user-password">Password *</label>
+                        <input 
+                            type="password" 
+                            id="user-password" 
+                            name="password" 
+                            required
+                            placeholder="Enter password"
+                            minlength="6"
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user-first-name">First Name *</label>
+                            <input 
+                                type="text" 
+                                id="user-first-name" 
+                                name="first_name" 
+                                required
+                                placeholder="John"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user-last-name">Last Name *</label>
+                            <input 
+                                type="text" 
+                                id="user-last-name" 
+                                name="last_name" 
+                                required
+                                placeholder="Doe"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user-role">Role *</label>
+                        <select id="user-role" name="role" required>
+                            <option value="admin">Admin</option>
+                            <option value="owner">Company Owner</option>
+                            <option value="manager">Company Manager</option>
+                            <option value="staff">Company Staff</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" data-action="close-user-modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/admin-users.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.navbar-toggle').addEventListener('click', function() {
+            document.querySelector('.navbar-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
