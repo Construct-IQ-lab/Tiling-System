@@ -1,22 +1,36 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
+
 from config import settings
 from database import init_db
-from routes import projects, calculations
+from middleware.company_context import CompanyContextMiddleware
 
-# Initialize database
-init_db()
+# Import routers
+from routes import auth, admin, companies, calculations
 
-# Create FastAPI app
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan context manager for startup and shutdown events."""
+    # Startup: Initialize database
+    print("Initializing database...")
+    init_db()
+    print(f"Starting {settings.APP_NAME} v{settings.VERSION}")
+    yield
+    # Shutdown
+    print("Shutting down application...")
+
+
+# Create FastAPI application
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.VERSION,
-    description="API for managing tiling projects, calculations, and material estimations",
-    docs_url="/docs",
-    redoc_url="/redoc"
+    description="Multi-tenant tiling business management system with authentication and company management",
+    lifespan=lifespan
 )
 
-# CORS middleware
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.ALLOWED_ORIGINS,
@@ -25,23 +39,42 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Add custom middleware
+app.add_middleware(CompanyContextMiddleware)
+
 # Include routers
-app.include_router(projects.router, prefix="/api/v1/projects", tags=["Projects"])
-app.include_router(calculations.router, prefix="/api/v1/calculations", tags=["Calculations"])
+app.include_router(auth.router, prefix="/api")
+app.include_router(admin.router, prefix="/api")
+app.include_router(companies.router, prefix="/api")
+app.include_router(calculations.router, prefix="/api")
 
 
-@app.get("/", tags=["Root"])
-def read_root():
-    """Root endpoint"""
+@app.get("/")
+async def root():
+    """Root endpoint with API information."""
     return {
-        "name": settings.APP_NAME,
+        "message": f"Welcome to {settings.APP_NAME}",
         "version": settings.VERSION,
-        "status": "running",
-        "docs": "/docs"
+        "docs": "/docs",
+        "status": "operational"
     }
 
 
-@app.get("/health", tags=["Health"])
-def health_check():
-    """Health check endpoint"""
-    return {"status": "healthy", "version": settings.VERSION}
+@app.get("/health")
+async def health_check():
+    """Health check endpoint."""
+    return {
+        "status": "healthy",
+        "app_name": settings.APP_NAME,
+        "version": settings.VERSION
+    }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=settings.DEBUG
+    )
