@@ -19,6 +19,9 @@ def create_admin_user(db: Session):
     """
     Create the default admin user if it doesn't exist.
     
+    NOTE: Default password is 'admin123' for initial setup convenience.
+    IMPORTANT: Change this password immediately after first login in production.
+    
     Args:
         db: Database session
     """

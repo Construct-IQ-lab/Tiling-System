@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "your-secret-key-change-in-production-please-use-strong-key"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 10080  # 7 days
+    # NOTE: "*" is included for development/testing. Remove it in production
+    # and specify only trusted domains
     ALLOWED_ORIGINS: List[str] = [
         "http://localhost:3000",
         "http://localhost:5173",
