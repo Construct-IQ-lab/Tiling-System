@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from datetime import datetime, timezone
+from datetime import datetime
 from decimal import Decimal
 
 from database import get_db
@@ -276,9 +276,9 @@ async def update_project(
     
     # Update completed_at timestamp if status changed to completed
     if project_data.status == ProjectStatus.COMPLETED and project.status != ProjectStatus.COMPLETED:
-        project.completed_at = datetime.now(timezone.utc)
+        project.completed_at = datetime.utcnow()
     
-    project.updated_at = datetime.now(timezone.utc)
+    project.updated_at = datetime.utcnow()
     db.commit()
     db.refresh(project)
     
