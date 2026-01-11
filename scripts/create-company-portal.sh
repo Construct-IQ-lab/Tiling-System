@@ -1,9 +1,10 @@
 #!/bin/bash
+set -euo pipefail
 
 # Script to create company portal directories
 # Usage: ./create-company-portal.sh <company-slug>
 
-if [ -z "$1" ]; then
+if [ -z "${1:-}" ]; then
     echo "Usage: ./create-company-portal.sh <company-slug>"
     echo "Example: ./create-company-portal.sh elitetilingsolutions"
     exit 1

@@ -96,9 +96,13 @@ function updateNavigationLinks(companySlug) {
  * Initialize theme on page load for company portal pages
  */
 document.addEventListener('DOMContentLoaded', () => {
-    const isCompanyPage = window.location.pathname.includes('/') && 
-                          !window.location.pathname.includes('/admin/') && 
-                          !window.location.pathname.includes('/auth/');
+    const pathname = window.location.pathname;
+    const isAdminPage = pathname.includes('/admin/');
+    const isAuthPage = pathname.includes('/auth/');
+    const isFrontendDirectory = pathname.includes('/frontend/');
+    
+    // Load theme only for company pages (not admin, auth, or frontend directory)
+    const isCompanyPage = !isAdminPage && !isAuthPage && !isFrontendDirectory;
     
     if (isCompanyPage) {
         const companySlug = getCompanySlugFromUrl();

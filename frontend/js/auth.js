@@ -16,7 +16,7 @@ function checkAuth() {
     if (!token) {
         // Save current page to redirect back after login
         localStorage.setItem('redirect_after_login', currentPage);
-        window.location.href = '/auth/login.html';
+        window.location.href = '/frontend/auth/login.html';
     }
 }
 
@@ -167,10 +167,12 @@ function togglePasswordVisibility(inputId, buttonId) {
     
     if (input.type === 'password') {
         input.type = 'text';
-        button.innerHTML = '👁️';
+        button.innerHTML = '🙈';
+        button.setAttribute('aria-label', 'Hide password');
     } else {
         input.type = 'password';
         button.innerHTML = '👁️';
+        button.setAttribute('aria-label', 'Show password');
     }
 }
 

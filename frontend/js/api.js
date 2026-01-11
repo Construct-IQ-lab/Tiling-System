@@ -1,6 +1,9 @@
 // API Helper Functions
 
-const API_BASE_URL = 'http://localhost:8000/api';
+// Determine API base URL based on environment
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:8000/api'
+    : (window.location.origin + '/api');
 
 /**
  * Makes an API request with proper error handling
