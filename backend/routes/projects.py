@@ -267,6 +267,14 @@ async def update_project(
     
     # Update fields
     update_data = project_data.model_dump(exclude_unset=True)
+    
+    # Check if status is changing to completed before updating
+    status_changed_to_completed = (
+        project_data.status is not None and 
+        project_data.status == ProjectStatus.COMPLETED and 
+        project.status != ProjectStatus.COMPLETED
+    )
+    
     for field, value in update_data.items():
         setattr(project, field, value)
     
@@ -275,7 +283,7 @@ async def update_project(
         project.room_area = calculate_room_area(project.room_length, project.room_width)
     
     # Update completed_at timestamp if status changed to completed
-    if project_data.status == ProjectStatus.COMPLETED and project.status != ProjectStatus.COMPLETED:
+    if status_changed_to_completed:
         project.completed_at = datetime.utcnow()
     
     project.updated_at = datetime.utcnow()
@@ -308,5 +316,3 @@ async def delete_project(
     
     db.delete(project)
     db.commit()
-    
-    return None
