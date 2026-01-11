@@ -2,16 +2,6 @@
 
 const API_URL = 'http://localhost:8000';
 
-// HTML Escape function to prevent XSS
-function escapeHtml(text) {
-    if (text === null || text === undefined) {
-        return '';
-    }
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
 // Generate slug from company name
 function generateSlug(name) {
     return name

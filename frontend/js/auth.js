@@ -2,16 +2,6 @@
 
 const API_URL = 'http://localhost:8000';
 
-// HTML Escape function to prevent XSS
-function escapeHtml(text) {
-    if (text === null || text === undefined) {
-        return '';
-    }
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
 // Check if user is authenticated
 async function checkAuth() {
     const token = localStorage.getItem('token');

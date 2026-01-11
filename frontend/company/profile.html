@@ -75,6 +75,7 @@
     
     <script src="../js/auth.js"></script>
     <script src="../js/theme.js"></script>
+    <script src="../js/utils.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             await checkAuth();
@@ -100,11 +101,11 @@
                     document.getElementById('profileInfo').innerHTML = `
                         <div class="info-item">
                             <label>Company Name:</label>
-                            <span>${company.name}</span>
+                            <span>${escapeHtml(company.name)}</span>
                         </div>
                         <div class="info-item">
                             <label>URL Slug:</label>
-                            <span>${company.slug}</span>
+                            <span>${escapeHtml(company.slug)}</span>
                         </div>
                     `;
                     
