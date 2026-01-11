@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Tiling System</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/company.css">
+</head>
+<body>
+    <nav class="company-nav">
+        <div class="company-nav-content">
+            <div class="company-branding">
+                <img id="company-logo" class="company-logo" src="" alt="Company Logo" style="display: none;">
+                <span class="company-name">Company Name</span>
+            </div>
+            <ul class="company-menu">
+                <li><a href="index.html" id="nav-dashboard">Dashboard</a></li>
+                <li><a href="projects.html" id="nav-projects" class="active">Projects</a></li>
+                <li><a href="calculator.html" id="nav-calculator">Calculator</a></li>
+                <li><a href="quotes.html" id="nav-quotes">Quotes</a></li>
+                <li><a href="profile.html" id="nav-profile">Profile</a></li>
+            </ul>
+            <div class="company-user">
+                <span id="user-name">User</span>
+                <button class="btn btn-sm btn-secondary" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="company-main">
+        <div class="page-header">
+            <h1 class="page-title">Projects</h1>
+            <button class="btn btn-company-primary" onclick="showCreateProjectForm()">New Project</button>
+        </div>
+        
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading projects...</p>
+        </div>
+        
+        <div id="projects-grid" class="entity-grid"></div>
+    </main>
+    
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create New Project</h3>
+                <button class="modal-close" onclick="hideCreateProjectForm()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="project-form" onsubmit="handleProjectSubmit(event)">
+                    <div class="form-group">
+                        <label for="project-name" class="form-label">Project Name *</label>
+                        <input type="text" id="project-name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-description" class="form-label">Description</label>
+                        <textarea id="project-description" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-client-name" class="form-label">Client Name</label>
+                        <input type="text" id="project-client-name" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-client-email" class="form-label">Client Email</label>
+                        <input type="email" id="project-client-email" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-client-phone" class="form-label">Client Phone</label>
+                        <input type="tel" id="project-client-phone" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-budget" class="form-label">Budget ($)</label>
+                        <input type="number" id="project-budget" class="form-control" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="hideCreateProjectForm()">Cancel</button>
+                        <button type="submit" class="btn btn-company-primary">Create Project</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/company-projects.js"></script>
+</body>
+</html>

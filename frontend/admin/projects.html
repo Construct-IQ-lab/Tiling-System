@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Admin - Tiling System</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <nav class="admin-nav">
+        <div class="admin-nav-content">
+            <div class="admin-logo">🏠 Tiling System Admin</div>
+            <ul class="admin-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="companies.html">Companies</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+            <div class="admin-user">
+                <span id="user-name">Admin</span>
+                <button class="btn btn-sm btn-secondary" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="admin-main">
+        <div class="page-header">
+            <h1 class="page-title">All Projects</h1>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Projects Across All Companies</div>
+            <div class="card-body">
+                <p style="text-align: center; padding: 40px; color: #666;">
+                    Project listing interface will be displayed here.<br>
+                    Features: View all projects, filter by company, status tracking.
+                </p>
+            </div>
+        </div>
+    </main>
+    
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>

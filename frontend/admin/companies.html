@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies - Admin - Tiling System</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <nav class="admin-nav">
+        <div class="admin-nav-content">
+            <div class="admin-logo">
+                🏠 Tiling System Admin
+            </div>
+            <ul class="admin-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="companies.html" class="active">Companies</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+            <div class="admin-user">
+                <span id="user-name">Admin</span>
+                <button class="btn btn-sm btn-secondary" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="admin-main">
+        <div class="page-header">
+            <h1 class="page-title">Companies</h1>
+            <button class="btn btn-primary" onclick="showCreateForm()">Add New Company</button>
+        </div>
+        
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading companies...</p>
+        </div>
+        
+        <div id="companies-grid" class="entity-grid"></div>
+    </main>
+    
+    <!-- Company Modal -->
+    <div id="company-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Create New Company</h3>
+                <button class="modal-close" onclick="hideCreateForm()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="company-form" onsubmit="handleCompanySubmit(event)">
+                    <input type="hidden" id="company-id">
+                    
+                    <div class="form-group">
+                        <label for="company-name" class="form-label">Company Name *</label>
+                        <input type="text" id="company-name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company-slug" class="form-label">Slug * (URL identifier)</label>
+                        <input type="text" id="company-slug" class="form-control" required pattern="[a-z0-9-]+">
+                        <small style="color: #666;">Lowercase letters, numbers, and hyphens only</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company-email" class="form-label">Email *</label>
+                        <input type="email" id="company-email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company-phone" class="form-label">Phone</label>
+                        <input type="tel" id="company-phone" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company-address" class="form-label">Address</label>
+                        <textarea id="company-address" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="company-primary-color" class="form-label">Primary Color</label>
+                                <input type="color" id="company-primary-color" class="form-control" value="#1a73e8">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="company-secondary-color" class="form-label">Secondary Color</label>
+                                <input type="color" id="company-secondary-color" class="form-control" value="#34a853">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company-plan" class="form-label">Subscription Plan</label>
+                        <select id="company-plan" class="form-control">
+                            <option value="basic">Basic</option>
+                            <option value="professional">Professional</option>
+                            <option value="enterprise">Enterprise</option>
+                        </select>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="hideCreateForm()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Company</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin-companies.js"></script>
+</body>
+</html>
