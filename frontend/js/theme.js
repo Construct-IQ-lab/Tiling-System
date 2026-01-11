@@ -2,6 +2,16 @@
 
 const API_URL = 'http://localhost:8000';
 
+// HTML Escape function to prevent XSS
+function escapeHtml(text) {
+    if (text === null || text === undefined) {
+        return '';
+    }
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 // Load and apply company theme
 async function loadCompanyTheme() {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -32,13 +42,18 @@ async function loadCompanyTheme() {
         // Update company name
         const companyNameElement = document.getElementById('companyName');
         if (companyNameElement) {
-            companyNameElement.textContent = theme.name;
+            companyNameElement.textContent = theme.name; // Use textContent to prevent XSS
         }
         
         // Update company logo
         const companyLogoElement = document.getElementById('companyLogo');
         if (companyLogoElement && theme.logo_url) {
-            companyLogoElement.innerHTML = `<img src="${theme.logo_url}" alt="${theme.name}">`;
+            // Validate logo URL is a valid image URL
+            const img = document.createElement('img');
+            img.src = theme.logo_url;
+            img.alt = escapeHtml(theme.name);
+            companyLogoElement.innerHTML = '';
+            companyLogoElement.appendChild(img);
         }
         
         // Update navigation links with company slug

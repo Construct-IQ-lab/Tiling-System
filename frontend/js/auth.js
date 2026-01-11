@@ -2,6 +2,16 @@
 
 const API_URL = 'http://localhost:8000';
 
+// HTML Escape function to prevent XSS
+function escapeHtml(text) {
+    if (text === null || text === undefined) {
+        return '';
+    }
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 // Check if user is authenticated
 async function checkAuth() {
     const token = localStorage.getItem('token');
@@ -55,12 +65,14 @@ async function checkAuth() {
 function updateUserInfo(user) {
     const userInfoElement = document.getElementById('userInfo');
     if (userInfoElement) {
-        const initial = user.username ? user.username.charAt(0).toUpperCase() : 'U';
+        const initial = user.username ? escapeHtml(user.username).charAt(0).toUpperCase() : 'U';
+        const username = escapeHtml(user.username || '');
+        const email = escapeHtml(user.email || '');
         userInfoElement.innerHTML = `
             <div class="user-avatar">${initial}</div>
             <div class="user-details">
-                <div class="user-name">${user.username}</div>
-                <div class="user-email">${user.email}</div>
+                <div class="user-name">${username}</div>
+                <div class="user-email">${email}</div>
             </div>
         `;
     }

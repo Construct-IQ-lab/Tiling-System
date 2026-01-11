@@ -2,6 +2,16 @@
 
 const API_URL = 'http://localhost:8000';
 
+// HTML Escape function to prevent XSS
+function escapeHtml(text) {
+    if (text === null || text === undefined) {
+        return '';
+    }
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 let currentFilter = 'all';
 
 // Load projects
@@ -42,17 +52,17 @@ async function loadProjects(status = null) {
         // Render projects
         grid.innerHTML = projects.map(project => `
             <div class="project-card">
-                <h3>${project.name}</h3>
-                <p>${project.description || 'No description'}</p>
+                <h3>${escapeHtml(project.name)}</h3>
+                <p>${escapeHtml(project.description || 'No description')}</p>
                 <div style="margin-top: 12px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <span style="font-size: 13px; color: var(--company-text-muted);">Status:</span>
-                        <span style="font-weight: 600; text-transform: capitalize;">${project.status.replace('_', ' ')}</span>
+                        <span style="font-weight: 600; text-transform: capitalize;">${escapeHtml(project.status.replace('_', ' '))}</span>
                     </div>
                     ${project.client_name ? `
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <span style="font-size: 13px; color: var(--company-text-muted);">Client:</span>
-                        <span>${project.client_name}</span>
+                        <span>${escapeHtml(project.client_name)}</span>
                     </div>
                     ` : ''}
                     ${project.budget ? `

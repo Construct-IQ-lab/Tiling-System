@@ -2,6 +2,16 @@
 
 const API_URL = 'http://localhost:8000';
 
+// HTML Escape function to prevent XSS
+function escapeHtml(text) {
+    if (text === null || text === undefined) {
+        return '';
+    }
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 // Generate slug from company name
 function generateSlug(name) {
     return name
@@ -40,15 +50,15 @@ async function loadCompanies() {
             <div class="company-card">
                 <div class="company-header">
                     <div>
-                        <div class="company-name">${company.name}</div>
-                        <div class="company-slug">/${company.slug}/</div>
+                        <div class="company-name">${escapeHtml(company.name)}</div>
+                        <div class="company-slug">/${escapeHtml(company.slug)}/</div>
                     </div>
-                    <span class="status-badge ${company.status}">${company.status}</span>
+                    <span class="status-badge ${escapeHtml(company.status)}">${escapeHtml(company.status)}</span>
                 </div>
                 <div class="company-info">
-                    <p><strong>Email:</strong> ${company.email}</p>
-                    ${company.phone ? `<p><strong>Phone:</strong> ${company.phone}</p>` : ''}
-                    <p><strong>Plan:</strong> ${company.subscription_plan}</p>
+                    <p><strong>Email:</strong> ${escapeHtml(company.email)}</p>
+                    ${company.phone ? `<p><strong>Phone:</strong> ${escapeHtml(company.phone)}</p>` : ''}
+                    <p><strong>Plan:</strong> ${escapeHtml(company.subscription_plan)}</p>
                 </div>
                 <div class="company-stats">
                     <div class="company-stat">
