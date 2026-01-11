@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Tiling System</title>
+    <link rel="stylesheet" href="../css/company.css">
+</head>
+<body>
+    <div class="company-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="company-logo" id="companyLogo">
+                    <span class="logo-placeholder">🏢</span>
+                </div>
+                <h2 id="companyName">Company</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="projects.html" class="nav-item active">
+                    <span class="nav-icon">📋</span>
+                    Projects
+                </a>
+                <a href="calculator.html" class="nav-item">
+                    <span class="nav-icon">🧮</span>
+                    Calculator
+                </a>
+                <a href="quotes.html" class="nav-item">
+                    <span class="nav-icon">💼</span>
+                    Quotes
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    Profile
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo"></div>
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Projects</h1>
+                <button class="primary-button" id="createProjectButton">
+                    <span>+ New Project</span>
+                </button>
+            </header>
+            
+            <div class="content-section">
+                <div class="filters">
+                    <button class="filter-button active" data-status="all">All</button>
+                    <button class="filter-button" data-status="planning">Planning</button>
+                    <button class="filter-button" data-status="in_progress">In Progress</button>
+                    <button class="filter-button" data-status="completed">Completed</button>
+                </div>
+                
+                <div class="projects-grid" id="projectsGrid">
+                    <div class="loading-message">Loading projects...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../js/auth.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/company-projects.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Tiling System</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Tiling System</h2>
+                <p class="role-badge">Admin Portal</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="companies.html" class="nav-item">
+                    <span class="nav-icon">🏢</span>
+                    Companies
+                </a>
+                <a href="users.html" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    Users
+                </a>
+                <a href="projects.html" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    Projects
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo">
+                    <div class="user-avatar">A</div>
+                    <div class="user-details">
+                        <div class="user-name">Admin</div>
+                        <div class="user-email">admin@example.com</div>
+                    </div>
+                </div>
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Dashboard</h1>
+            </header>
+            
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">🏢</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Companies</div>
+                        <div class="stat-value" id="totalCompanies">-</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Active Companies</div>
+                        <div class="stat-value" id="activeCompanies">-</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Users</div>
+                        <div class="stat-value" id="totalUsers">-</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">📋</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Projects</div>
+                        <div class="stat-value" id="totalProjects">-</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2>Quick Actions</h2>
+                <div class="quick-actions">
+                    <a href="companies.html" class="action-card">
+                        <div class="action-icon">➕</div>
+                        <div class="action-title">Create Company</div>
+                        <div class="action-description">Add a new company to the system</div>
+                    </a>
+                    <a href="users.html" class="action-card">
+                        <div class="action-icon">👤</div>
+                        <div class="action-title">Create User</div>
+                        <div class="action-description">Add a new user account</div>
+                    </a>
+                    <a href="projects.html" class="action-card">
+                        <div class="action-icon">📊</div>
+                        <div class="action-title">View Projects</div>
+                        <div class="action-description">Browse all projects</div>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

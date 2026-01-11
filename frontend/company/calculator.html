@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator - Tiling System</title>
+    <link rel="stylesheet" href="../css/company.css">
+</head>
+<body>
+    <div class="company-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="company-logo" id="companyLogo">
+                    <span class="logo-placeholder">🏢</span>
+                </div>
+                <h2 id="companyName">Company</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="projects.html" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    Projects
+                </a>
+                <a href="calculator.html" class="nav-item active">
+                    <span class="nav-icon">🧮</span>
+                    Calculator
+                </a>
+                <a href="quotes.html" class="nav-item">
+                    <span class="nav-icon">💼</span>
+                    Quotes
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    Profile
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo"></div>
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Tiling Calculator</h1>
+            </header>
+            
+            <div class="content-section">
+                <div class="calculator-container">
+                    <h2>Material Estimation</h2>
+                    <p>Calculate the materials needed for your tiling project. Based on the ARCHITECTURE.md specifications.</p>
+                    
+                    <form id="calculatorForm" class="calculator-form">
+                        <h3>Room Measurements</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Length (m)</label>
+                                <input type="number" step="0.01" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Width (m)</label>
+                                <input type="number" step="0.01" min="0" required>
+                            </div>
+                        </div>
+                        
+                        <h3>Tile Size</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Tile Length (m)</label>
+                                <input type="number" step="0.01" min="0" value="0.3" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tile Width (m)</label>
+                                <input type="number" step="0.01" min="0" value="0.3" required>
+                            </div>
+                        </div>
+                        
+                        <h3>Pattern & Wastage</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Pattern Type</label>
+                                <select>
+                                    <option value="straight">Straight (5-10% wastage)</option>
+                                    <option value="diagonal">Diagonal (10-15% wastage)</option>
+                                    <option value="herringbone">Herringbone (15-20% wastage)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Wastage (%)</label>
+                                <input type="number" min="0" max="50" value="10" required>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="primary-button">Calculate</button>
+                    </form>
+                    
+                    <div id="results" class="calculator-results" style="display: none;">
+                        <h3>Results</h3>
+                        <div class="result-item">
+                            <span>Total Area:</span>
+                            <strong id="totalArea">-</strong>
+                        </div>
+                        <div class="result-item">
+                            <span>Adjusted Area (with wastage):</span>
+                            <strong id="adjustedArea">-</strong>
+                        </div>
+                        <div class="result-item">
+                            <span>Tiles Needed:</span>
+                            <strong id="tilesNeeded">-</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../js/auth.js"></script>
+    <script src="../js/theme.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await checkAuth();
+            await loadCompanyTheme();
+        });
+    </script>
+</body>
+</html>

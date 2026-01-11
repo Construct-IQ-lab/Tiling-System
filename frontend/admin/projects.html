@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Admin - Tiling System</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Tiling System</h2>
+                <p class="role-badge">Admin Portal</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="companies.html" class="nav-item">
+                    <span class="nav-icon">🏢</span>
+                    Companies
+                </a>
+                <a href="users.html" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    Users
+                </a>
+                <a href="projects.html" class="nav-item active">
+                    <span class="nav-icon">📋</span>
+                    Projects
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo"></div>
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="content-header">
+                <h1>All Projects</h1>
+            </header>
+            
+            <div class="content-section">
+                <div class="info-message">
+                    <p>📋 View all projects across all companies. Project management features coming soon.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await checkAuth();
+        });
+    </script>
+</body>
+</html>
