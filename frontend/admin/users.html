@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - Tiling System</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-layout">
+    <!-- Admin Navigation -->
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">🏠 Tiling System Admin</a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="companies.html">Companies</a></li>
+                <li><a href="users.html" class="active">Users</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button id="logout-btn" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.3);">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="admin-content">
+        <div class="page-header">
+            <h1>Manage Users</h1>
+            <button id="add-user-btn" class="btn btn-primary">
+                + Add New User
+            </button>
+        </div>
+
+        <!-- Users Table -->
+        <div id="users-container" class="users-table-container">
+            <!-- Users will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Create User Modal -->
+    <div id="create-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New User</h3>
+                <button class="close">&times;</button>
+            </div>
+            
+            <form id="user-form">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user-first-name">First Name *</label>
+                            <input type="text" id="user-first-name" required 
+                                   placeholder="John">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user-last-name">Last Name *</label>
+                            <input type="text" id="user-last-name" required 
+                                   placeholder="Doe">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="user-email">Email *</label>
+                        <input type="email" id="user-email" required 
+                               placeholder="john.doe@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="user-password">Password *</label>
+                        <input type="password" id="user-password" required 
+                               placeholder="Minimum 8 characters" minlength="8">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="user-role">Role *</label>
+                        <select id="user-role" required>
+                            <option value="">Select Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="owner">Company Owner</option>
+                            <option value="manager">Company Manager</option>
+                            <option value="staff">Company Staff</option>
+                        </select>
+                    </div>
+                    
+                    <div id="company-group" class="form-group" style="display: none;">
+                        <label for="user-company">Company *</label>
+                        <select id="user-company">
+                            <option value="">Select Company</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" id="cancel-btn" class="btn btn-outline">
+                        Cancel
+                    </button>
+                    <button type="submit" id="submit-btn" class="btn btn-primary">
+                        Create User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/admin/users.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects - Tiling System</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-layout">
+    <!-- Admin Navigation -->
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">🏠 Tiling System Admin</a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="companies.html">Companies</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button id="logout-btn" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.3);">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="admin-content">
+        <div class="page-header">
+            <h1>All Projects</h1>
+        </div>
+
+        <div class="card">
+            <div class="card-body" style="text-align: center; padding: 3rem;">
+                <div style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;">📊</div>
+                <h2>Projects Management</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 1rem auto;">
+                    Project management features are available in the company portals. 
+                    Each company can manage their own projects through their dedicated portal.
+                </p>
+                <div style="margin-top: 2rem;">
+                    <a href="companies.html" class="btn btn-primary">
+                        Go to Companies
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/utils.js"></script>
+</body>
+</html>
