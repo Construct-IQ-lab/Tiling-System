@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from config import settings
-from database import init_db
-from routes import projects, calculations
+from backend.config import settings
+from backend.database import init_db
+from backend.routes import auth, admin, companies, projects, calculations
 
 # Initialize database
 init_db()
@@ -26,6 +26,16 @@ app.add_middleware(
 )
 
 # Include routers
+# Authentication
+app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
+
+# Admin routes
+app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
+
+# Company routes
+app.include_router(companies.router, prefix="/api/companies", tags=["Companies"])
+
+# Legacy routes (to be implemented)
 app.include_router(projects.router, prefix="/api/v1/projects", tags=["Projects"])
 app.include_router(calculations.router, prefix="/api/v1/calculations", tags=["Calculations"])
 
