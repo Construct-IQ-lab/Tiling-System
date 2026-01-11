@@ -37,7 +37,7 @@ function displayProjects(projects) {
             <p>${project.description || 'No description'}</p>
             <p><strong>Client:</strong> ${project.client_name || 'N/A'}</p>
             <p><strong>Area:</strong> ${project.area ? project.area + ' m²' : 'N/A'}</p>
-            <p><strong>Budget:</strong> ${project.budget ? '$' + project.budget.toFixed(2) : 'N/A'}</p>
+            <p><strong>Budget:</strong> ${project.budget ? `$${project.budget.toFixed(2)}` : 'N/A'}</p>
             <div class="project-card-footer">
                 <span class="status-badge status-${project.status}">${formatStatus(project.status)}</span>
                 <button class="btn btn-danger" onclick="deleteProjectHandler(${project.id})">Delete</button>

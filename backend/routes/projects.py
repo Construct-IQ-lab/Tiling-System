@@ -81,7 +81,7 @@ router = APIRouter()
 @router.post("/", response_model=ProjectResponse, status_code=201)
 def create_project(project: ProjectCreate, db: Session = Depends(get_db)):
     """Create a new project"""
-    db_project = Project(**project.dict())
+    db_project = Project(**project.model_dump())
     db.add(db_project)
     db.commit()
     db.refresh(db_project)
@@ -112,7 +112,7 @@ def update_project(project_id: int, project_update: ProjectUpdate, db: Session =
         raise HTTPException(status_code=404, detail="Project not found")
     
     # Update only provided fields
-    update_data = project_update.dict(exclude_unset=True)
+    update_data = project_update.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         setattr(project, field, value)
     
