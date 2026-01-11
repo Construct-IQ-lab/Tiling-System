@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Tiling System</title>
+    <link rel="stylesheet" href="/frontend/css/common.css">
+    <link rel="stylesheet" href="/frontend/css/admin.css">
+</head>
+<body>
+    <!-- Admin Navigation -->
+    <nav class="navbar admin-navbar">
+        <div class="navbar-container">
+            <a href="/frontend/admin/index.html" class="navbar-brand">
+                🏗️ Tiling System Admin
+            </a>
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a href="/frontend/admin/index.html" class="navbar-link active">Dashboard</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/companies.html" class="navbar-link">Companies</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/users.html" class="navbar-link">Users</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/projects.html" class="navbar-link">Projects</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/frontend/admin/reports.html" class="navbar-link">Reports</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-action="logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="admin-container">
+        <div class="page-header">
+            <h1 class="page-title">Dashboard</h1>
+        </div>
+
+        <div class="form-error" id="error-message"></div>
+        <div class="form-success" id="success-message"></div>
+
+        <!-- Stats Cards -->
+        <div class="admin-stats">
+            <div class="admin-stat-card companies">
+                <div class="stat-header">
+                    <div class="stat-info">
+                        <div class="stat-label">Total Companies</div>
+                        <div class="stat-value" id="total-companies">0</div>
+                    </div>
+                    <div class="stat-icon">🏢</div>
+                </div>
+                <div class="stat-subtitle">
+                    <span id="active-companies">0</span> Active
+                </div>
+            </div>
+
+            <div class="admin-stat-card projects">
+                <div class="stat-header">
+                    <div class="stat-info">
+                        <div class="stat-label">Total Projects</div>
+                        <div class="stat-value" id="total-projects">0</div>
+                    </div>
+                    <div class="stat-icon">📋</div>
+                </div>
+                <div class="stat-subtitle">
+                    <span id="active-projects">0</span> Active
+                </div>
+            </div>
+
+            <div class="admin-stat-card users">
+                <div class="stat-header">
+                    <div class="stat-info">
+                        <div class="stat-label">Total Users</div>
+                        <div class="stat-value" id="total-users">0</div>
+                    </div>
+                    <div class="stat-icon">👥</div>
+                </div>
+                <div class="stat-subtitle">
+                    <span id="active-users">0</span> Active
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <h2 class="mb-2">Quick Actions</h2>
+        <div class="quick-actions">
+            <div class="quick-action-card" onclick="window.location.href='/frontend/admin/companies.html'">
+                <div class="quick-action-icon">🏢</div>
+                <div class="quick-action-title">Add New Company</div>
+                <div class="quick-action-description">Create a new company account</div>
+            </div>
+
+            <div class="quick-action-card" onclick="window.location.href='/frontend/admin/users.html'">
+                <div class="quick-action-icon">👤</div>
+                <div class="quick-action-title">Add New User</div>
+                <div class="quick-action-description">Create a new user account</div>
+            </div>
+
+            <div class="quick-action-card" onclick="window.location.href='/frontend/admin/companies.html'">
+                <div class="quick-action-icon">👁️</div>
+                <div class="quick-action-title">View All Companies</div>
+                <div class="quick-action-description">Manage company accounts</div>
+            </div>
+
+            <div class="quick-action-card" onclick="window.location.href='/frontend/admin/projects.html'">
+                <div class="quick-action-icon">📊</div>
+                <div class="quick-action-title">View All Projects</div>
+                <div class="quick-action-description">Monitor all projects</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/admin.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.navbar-toggle').addEventListener('click', function() {
+            document.querySelector('.navbar-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

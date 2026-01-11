@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="/frontend/css/common.css">
+    <link rel="stylesheet" href="/frontend/css/company.css">
+</head>
+<body>
+    <!-- Company Navigation -->
+    <nav class="navbar company-navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand" data-nav-link="index.html">
+                <img src="" alt="" class="company-logo" style="display: none;">
+                <span class="company-name">Company Name</span>
+            </a>
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="index.html">Dashboard</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link active" data-nav-link="projects.html">Projects</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="calculator.html">Calculator</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="quotes.html">Quotes</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="profile.html">Profile</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-action="logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="company-container">
+        <div class="page-header">
+            <h1 class="page-title">Projects</h1>
+            <div class="page-actions">
+                <button class="btn btn-company-primary" onclick="showCreateProjectForm()">
+                    + New Project
+                </button>
+            </div>
+        </div>
+
+        <div class="form-error" id="error-message"></div>
+        <div class="form-success" id="success-message"></div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projects-grid">
+            <!-- Projects will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Create/Edit Project Modal -->
+    <div class="modal" id="project-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="project-modal-title">Create New Project</h2>
+                <button class="modal-close" data-action="close-project-modal">&times;</button>
+            </div>
+            <form id="project-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="project-name">Project Name *</label>
+                        <input 
+                            type="text" 
+                            id="project-name" 
+                            name="name" 
+                            required
+                            placeholder="Enter project name"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-description">Description</label>
+                        <textarea 
+                            id="project-description" 
+                            name="description"
+                            placeholder="Enter project description"
+                            rows="3"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-name">Client Name</label>
+                        <input 
+                            type="text" 
+                            id="client-name" 
+                            name="client_name"
+                            placeholder="Enter client name"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-contact">Client Contact</label>
+                        <input 
+                            type="text" 
+                            id="client-contact" 
+                            name="client_contact"
+                            placeholder="Phone or email"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-address">Client Address</label>
+                        <textarea 
+                            id="client-address" 
+                            name="client_address"
+                            placeholder="Enter client address"
+                            rows="2"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-area">Area (m²)</label>
+                            <input 
+                                type="number" 
+                                id="project-area" 
+                                name="area"
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="project-budget">Budget ($)</label>
+                            <input 
+                                type="number" 
+                                id="project-budget" 
+                                name="budget"
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" data-action="close-project-modal">Cancel</button>
+                    <button type="submit" class="btn btn-company-primary">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/theme.js"></script>
+    <script src="/frontend/js/company-projects.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.navbar-toggle').addEventListener('click', function() {
+            document.querySelector('.navbar-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

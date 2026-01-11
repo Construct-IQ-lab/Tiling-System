@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/frontend/css/common.css">
+    <link rel="stylesheet" href="/frontend/css/company.css">
+</head>
+<body>
+    <!-- Company Navigation -->
+    <nav class="navbar company-navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand" data-nav-link="index.html">
+                <img src="" alt="" class="company-logo" style="display: none;">
+                <span class="company-name">Company Name</span>
+            </a>
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link active" data-nav-link="index.html">Dashboard</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="projects.html">Projects</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="calculator.html">Calculator</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="quotes.html">Quotes</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="profile.html">Profile</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-action="logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="company-container">
+        <div class="page-header">
+            <h1 class="page-title">Dashboard</h1>
+        </div>
+
+        <div class="form-error" id="error-message"></div>
+        <div class="form-success" id="success-message"></div>
+
+        <!-- Stats Cards -->
+        <div class="company-stats">
+            <div class="company-stat-card total">
+                <div class="stat-header">
+                    <div class="stat-info">
+                        <div class="stat-label">Total Projects</div>
+                        <div class="stat-value" id="total-projects">0</div>
+                    </div>
+                    <div class="stat-icon">📋</div>
+                </div>
+            </div>
+
+            <div class="company-stat-card active">
+                <div class="stat-header">
+                    <div class="stat-info">
+                        <div class="stat-label">Active Projects</div>
+                        <div class="stat-value" id="active-projects">0</div>
+                    </div>
+                    <div class="stat-icon">🔄</div>
+                </div>
+            </div>
+
+            <div class="company-stat-card completed">
+                <div class="stat-header">
+                    <div class="stat-info">
+                        <div class="stat-label">Completed Projects</div>
+                        <div class="stat-value" id="completed-projects">0</div>
+                    </div>
+                    <div class="stat-icon">✅</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <h2 class="mb-2">Quick Actions</h2>
+        <div class="quick-actions">
+            <div class="quick-action-card" onclick="window.location.href='calculator.html'">
+                <div class="quick-action-icon">🧮</div>
+                <div class="quick-action-title">Calculate Materials</div>
+                <div class="quick-action-description">Estimate tiles, grout, and adhesive</div>
+            </div>
+
+            <div class="quick-action-card" onclick="window.location.href='projects.html'">
+                <div class="quick-action-icon">➕</div>
+                <div class="quick-action-title">New Project</div>
+                <div class="quick-action-description">Create a new tiling project</div>
+            </div>
+
+            <div class="quick-action-card" onclick="window.location.href='quotes.html'">
+                <div class="quick-action-icon">💰</div>
+                <div class="quick-action-title">Create Quote</div>
+                <div class="quick-action-description">Generate a client quote</div>
+            </div>
+
+            <div class="quick-action-card" onclick="window.location.href='projects.html'">
+                <div class="quick-action-icon">👁️</div>
+                <div class="quick-action-title">View All Projects</div>
+                <div class="quick-action-description">Manage your projects</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/theme.js"></script>
+    <script src="/frontend/js/company.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.navbar-toggle').addEventListener('click', function() {
+            document.querySelector('.navbar-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

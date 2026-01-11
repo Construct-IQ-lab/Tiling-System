@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile</title>
+    <link rel="stylesheet" href="/frontend/css/common.css">
+    <link rel="stylesheet" href="/frontend/css/company.css">
+</head>
+<body>
+    <!-- Company Navigation -->
+    <nav class="navbar company-navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand" data-nav-link="index.html">
+                <img src="" alt="" class="company-logo" style="display: none;">
+                <span class="company-name">Company Name</span>
+            </a>
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="index.html">Dashboard</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="projects.html">Projects</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="calculator.html">Calculator</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="quotes.html">Quotes</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link active" data-nav-link="profile.html">Profile</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-action="logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="company-container">
+        <div class="profile-container">
+            <div class="page-header">
+                <h1 class="page-title">Company Profile</h1>
+            </div>
+
+            <div class="form-error" id="error-message"></div>
+            <div class="form-success" id="success-message"></div>
+
+            <!-- Company Information -->
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-logo-placeholder" id="logo-display">
+                        🏢
+                    </div>
+                    <div class="profile-info">
+                        <h2 class="profile-name" id="profile-company-name">Company Name</h2>
+                        <p class="profile-email" id="profile-company-email">email@company.com</p>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3 class="section-title">Company Information</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Phone</span>
+                            <span class="info-value" id="profile-phone">Not set</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">URL Slug</span>
+                            <span class="info-value" id="profile-slug">company-slug</span>
+                        </div>
+                        <div class="info-item" style="grid-column: 1 / -1;">
+                            <span class="info-label">Address</span>
+                            <span class="info-value" id="profile-address">Not set</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3 class="section-title">Branding</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Primary Color</span>
+                            <div class="color-preview">
+                                <div class="color-swatch" id="primary-color-swatch"></div>
+                                <span class="info-value" id="primary-color-value">#3498db</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Secondary Color</span>
+                            <div class="color-preview">
+                                <div class="color-swatch" id="secondary-color-swatch"></div>
+                                <span class="info-value" id="secondary-color-value">#2ecc71</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn-company-primary" onclick="editProfile()">Edit Profile</button>
+                </div>
+            </div>
+
+            <!-- Change Password Section -->
+            <div class="profile-card">
+                <h3 class="section-title">Change Password</h3>
+                <p style="color: #666; margin-bottom: 20px;">
+                    Password change functionality will be available soon.
+                </p>
+                <button class="btn btn-outline" onclick="changePassword()">Change Password</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/theme.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.navbar-toggle').addEventListener('click', function() {
+            document.querySelector('.navbar-menu').classList.toggle('active');
+        });
+
+        // Load company profile
+        async function loadCompanyProfile() {
+            const companySlug = getCompanySlugFromUrl() || localStorage.getItem('company_slug');
+            
+            if (!companySlug) {
+                showError('Company not found');
+                return;
+            }
+            
+            try {
+                const theme = await apiRequest(`/companies/${companySlug}/theme`, 'GET', null, true);
+                
+                // Update profile display
+                document.getElementById('profile-company-name').textContent = theme.company_name;
+                document.getElementById('profile-slug').textContent = companySlug;
+                
+                // Update colors
+                document.getElementById('primary-color-value').textContent = theme.primary_color;
+                document.getElementById('primary-color-swatch').style.backgroundColor = theme.primary_color;
+                document.getElementById('secondary-color-value').textContent = theme.secondary_color;
+                document.getElementById('secondary-color-swatch').style.backgroundColor = theme.secondary_color;
+                
+                // Update logo if exists
+                if (theme.logo_url) {
+                    const logoDisplay = document.getElementById('logo-display');
+                    logoDisplay.innerHTML = `<img src="${theme.logo_url}" alt="Logo" class="profile-logo-preview">`;
+                }
+                
+            } catch (error) {
+                console.error('Error loading profile:', error);
+                showError('Failed to load company profile');
+            }
+        }
+
+        function getCompanySlugFromUrl() {
+            const pathname = window.location.pathname;
+            const match = pathname.match(/^\/([^\/]+)\//);
+            if (match && match[1] !== 'admin' && match[1] !== 'auth' && match[1] !== 'frontend') {
+                return match[1];
+            }
+            return null;
+        }
+
+        // Placeholder functions
+        function editProfile() {
+            showError('Edit profile functionality coming soon');
+        }
+
+        function changePassword() {
+            showError('Change password functionality coming soon');
+        }
+
+        // Load profile on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCompanyProfile();
+        });
+    </script>
+</body>
+</html>
