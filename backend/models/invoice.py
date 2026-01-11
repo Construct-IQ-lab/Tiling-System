@@ -49,7 +49,7 @@ class Invoice(Base):
 
     # Relationships
     company = relationship("Company", back_populates="invoices")
-    project = relationship("Invoice", back_populates="invoices")
+    project = relationship("Project", back_populates="invoices")
 
     def __repr__(self):
         return f"<Invoice(id={self.id}, invoice_number='{self.invoice_number}', status='{self.status}')>"
