@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiling Calculator</title>
+    <link rel="stylesheet" href="/frontend/css/common.css">
+    <link rel="stylesheet" href="/frontend/css/company.css">
+</head>
+<body>
+    <!-- Company Navigation -->
+    <nav class="navbar company-navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand" data-nav-link="index.html">
+                <img src="" alt="" class="company-logo" style="display: none;">
+                <span class="company-name">Company Name</span>
+            </a>
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="index.html">Dashboard</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="projects.html">Projects</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link active" data-nav-link="calculator.html">Calculator</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="quotes.html">Quotes</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-nav-link="profile.html">Profile</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-action="logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="company-container">
+        <div class="page-header">
+            <h1 class="page-title">Tiling Calculator</h1>
+        </div>
+
+        <div class="form-error" id="error-message"></div>
+        <div class="form-success" id="success-message"></div>
+
+        <div class="calculator-container">
+            <!-- Calculator Steps -->
+            <div class="calculator-steps">
+                <div class="calculator-step active">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Area</div>
+                </div>
+                <div class="calculator-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Materials</div>
+                </div>
+                <div class="calculator-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Cost</div>
+                </div>
+            </div>
+
+            <!-- Step 1: Area Calculator -->
+            <form id="step-1-form" class="calculator-form">
+                <div class="card">
+                    <h3 class="card-title">Step 1: Calculate Area</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="length">Length (meters) *</label>
+                            <input 
+                                type="number" 
+                                id="length" 
+                                name="length" 
+                                required
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="width">Width (meters) *</label>
+                            <input 
+                                type="number" 
+                                id="width" 
+                                name="width" 
+                                required
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                            >
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-company-primary btn-block">Calculate Area →</button>
+                </div>
+            </form>
+
+            <!-- Step 2: Materials Calculator -->
+            <form id="step-2-form" class="calculator-form" style="display: none;">
+                <div class="card">
+                    <h3 class="card-title">Step 2: Calculate Materials</h3>
+                    
+                    <div class="form-group">
+                        <label for="area">Total Area (m²) *</label>
+                        <input 
+                            type="number" 
+                            id="area" 
+                            name="area" 
+                            required
+                            readonly
+                            placeholder="0.00"
+                            step="0.01"
+                            min="0"
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tile-length">Tile Length (meters) *</label>
+                            <input 
+                                type="number" 
+                                id="tile-length" 
+                                name="tile_length" 
+                                required
+                                placeholder="0.30"
+                                step="0.01"
+                                min="0"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tile-width">Tile Width (meters) *</label>
+                            <input 
+                                type="number" 
+                                id="tile-width" 
+                                name="tile_width" 
+                                required
+                                placeholder="0.30"
+                                step="0.01"
+                                min="0"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="grout-joint-width">Grout Joint Width (mm) *</label>
+                            <input 
+                                type="number" 
+                                id="grout-joint-width" 
+                                name="grout_joint_width" 
+                                required
+                                placeholder="3"
+                                step="0.1"
+                                min="0"
+                                value="3"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="wastage-percent">Wastage (%) *</label>
+                            <input 
+                                type="number" 
+                                id="wastage-percent" 
+                                name="wastage_percent" 
+                                required
+                                placeholder="10"
+                                step="1"
+                                min="0"
+                                max="100"
+                                value="10"
+                            >
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" class="btn btn-outline" onclick="showStep(1)">← Back</button>
+                        <button type="submit" class="btn btn-company-primary" style="flex: 1;">Calculate Materials →</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Step 3: Cost Calculator -->
+            <form id="step-3-form" class="calculator-form" style="display: none;">
+                <div class="card">
+                    <h3 class="card-title">Step 3: Calculate Cost</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tiles-needed">Tiles Needed *</label>
+                            <input 
+                                type="number" 
+                                id="tiles-needed" 
+                                name="tiles_needed" 
+                                required
+                                readonly
+                                placeholder="0"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tile-price">Tile Price (per piece) *</label>
+                            <input 
+                                type="number" 
+                                id="tile-price" 
+                                name="tile_price" 
+                                required
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="grout-needed">Grout Needed (kg) *</label>
+                            <input 
+                                type="number" 
+                                id="grout-needed" 
+                                name="grout_needed" 
+                                required
+                                readonly
+                                placeholder="0.00"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="grout-price">Grout Price (per kg) *</label>
+                            <input 
+                                type="number" 
+                                id="grout-price" 
+                                name="grout_price" 
+                                required
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="adhesive-needed">Adhesive Needed (kg) *</label>
+                            <input 
+                                type="number" 
+                                id="adhesive-needed" 
+                                name="adhesive_needed" 
+                                required
+                                readonly
+                                placeholder="0.00"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adhesive-price">Adhesive Price (per kg) *</label>
+                            <input 
+                                type="number" 
+                                id="adhesive-price" 
+                                name="adhesive_price" 
+                                required
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="labor-hours">Labor Hours (optional)</label>
+                            <input 
+                                type="number" 
+                                id="labor-hours" 
+                                name="labor_hours" 
+                                placeholder="0"
+                                step="0.5"
+                                min="0"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="labor-rate">Labor Rate (per hour)</label>
+                            <input 
+                                type="number" 
+                                id="labor-rate" 
+                                name="labor_rate" 
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                            >
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" class="btn btn-outline" onclick="showStep(2)">← Back</button>
+                        <button type="submit" class="btn btn-company-primary" style="flex: 1;">Calculate Cost</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Results Display -->
+            <div id="calculator-results" class="calculator-results" style="display: none;">
+                <div class="result-header">
+                    <h3 class="result-title">Calculation Results</h3>
+                </div>
+
+                <div class="results-grid" id="results-grid">
+                    <!-- Results will be displayed here -->
+                </div>
+
+                <div class="calculator-actions">
+                    <button class="btn btn-outline" onclick="resetCalculator()">Start Over</button>
+                    <button class="btn btn-company-primary" onclick="saveCalculation()">Save Calculation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/theme.js"></script>
+    <script src="/frontend/js/calculator.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.navbar-toggle').addEventListener('click', function() {
+            document.querySelector('.navbar-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
