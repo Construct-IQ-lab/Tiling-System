@@ -7,7 +7,7 @@ from database import init_db
 from middleware.company_context import CompanyContextMiddleware
 
 # Import routers
-from routes import auth, admin, companies, calculations
+from routes import auth, admin, companies, calculations, projects
 
 
 @asynccontextmanager
@@ -46,6 +46,7 @@ app.add_middleware(CompanyContextMiddleware)
 app.include_router(auth.router, prefix="/api")
 app.include_router(admin.router, prefix="/api")
 app.include_router(companies.router, prefix="/api")
+app.include_router(projects.router, prefix="/api")
 app.include_router(calculations.router, prefix="/api")
 
 
