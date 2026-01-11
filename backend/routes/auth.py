@@ -113,4 +113,4 @@ async def get_current_user_info(current_user: User = Depends(get_current_user)):
     Returns:
         Current user information
     """
-    return UserResponse.from_orm(current_user)
+    return UserResponse.model_validate(current_user)

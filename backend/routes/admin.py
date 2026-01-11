@@ -92,7 +92,7 @@ async def create_company(
             detail="Company with this name or slug already exists"
         )
     
-    company = Company(**company_data.dict())
+    company = Company(**company_data.model_dump())
     db.add(company)
     db.commit()
     db.refresh(company)
@@ -133,7 +133,7 @@ async def update_company(
             detail="Company not found"
         )
     
-    for key, value in company_data.dict().items():
+    for key, value in company_data.model_dump().items():
         setattr(company, key, value)
     
     company.updated_at = datetime.utcnow()
