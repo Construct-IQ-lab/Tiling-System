@@ -9,7 +9,7 @@ async function checkAuth() {
     
     // If no token and not on login page, redirect to login
     if (!token && !currentPath.includes('login.html')) {
-        window.location.href = '/frontend/auth/login.html';
+        window.location.href = '/auth/login.html';
         return null;
     }
     
@@ -26,7 +26,7 @@ async function checkAuth() {
                 // Token invalid, clear and redirect to login
                 localStorage.clear();
                 if (!currentPath.includes('login.html')) {
-                    window.location.href = '/frontend/auth/login.html';
+                    window.location.href = '/auth/login.html';
                 }
                 return null;
             }
@@ -107,12 +107,12 @@ if (document.getElementById('loginForm')) {
             
             // Redirect based on role
             if (data.user.role === 'admin') {
-                window.location.href = '/frontend/admin/index.html';
+                window.location.href = '/admin/index.html';
             } else {
                 // Redirect to company dashboard
                 const slug = data.user.company_slug;
                 if (slug) {
-                    window.location.href = '/frontend/company/index.html';
+                    window.location.href = '/company/index.html';
                 } else {
                     throw new Error('No company associated with user');
                 }
@@ -150,7 +150,7 @@ function setupLogout() {
             
             // Clear local storage and redirect
             localStorage.clear();
-            window.location.href = '/frontend/auth/login.html';
+            window.location.href = '/auth/login.html';
         });
     }
 }
