@@ -1,0 +1,362 @@
+/* Company Portal Styles with CSS Variables for Theming */
+:root {
+    --company-primary: #1a73e8;
+    --company-secondary: #34a853;
+}
+
+.company-nav {
+    background-color: var(--company-primary);
+    color: white;
+    padding: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.company-nav-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.company-branding {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.company-logo {
+    height: 40px;
+    width: auto;
+    border-radius: 4px;
+}
+
+.company-name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.company-menu {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.company-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.company-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.company-menu a.active {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.company-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.company-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/* Themed Buttons */
+.btn-company-primary {
+    background-color: var(--company-primary);
+    color: white;
+}
+
+.btn-company-secondary {
+    background-color: var(--company-secondary);
+    color: white;
+}
+
+/* Themed Cards */
+.company-stat-card {
+    background: white;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--company-primary);
+}
+
+.company-stat-card.secondary {
+    border-left-color: var(--company-secondary);
+}
+
+/* Project Cards */
+.project-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 15px;
+}
+
+.project-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.project-status {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.project-status.planning {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.project-status.in-progress {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.project-status.completed {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.project-status.on-hold {
+    background-color: #fff9c4;
+    color: #f57f17;
+}
+
+.project-status.cancelled {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.project-details {
+    margin-bottom: 15px;
+}
+
+.project-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.project-detail-label {
+    color: #666;
+}
+
+.project-detail-value {
+    color: #333;
+    font-weight: 500;
+}
+
+.project-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* Quote Cards */
+.quote-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.quote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.quote-number {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.quote-amount {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--company-primary);
+}
+
+.quote-info {
+    margin-bottom: 15px;
+}
+
+.quote-info-item {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Calculator Styles */
+.calculator-steps {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.calculator-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.calculator-step.active .step-number {
+    background-color: var(--company-primary);
+    color: white;
+}
+
+.calculator-step.completed .step-number {
+    background-color: var(--company-secondary);
+    color: white;
+}
+
+.step-label {
+    font-weight: 500;
+    color: #666;
+}
+
+.calculator-step.active .step-label {
+    color: var(--company-primary);
+}
+
+.calculator-content {
+    background: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.calculation-result {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--company-primary);
+}
+
+.result-label {
+    color: #666;
+}
+
+.result-value {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Profile Page */
+.profile-section {
+    background: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.profile-section-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid var(--company-primary);
+    padding-bottom: 10px;
+}
+
+.color-picker-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.color-picker {
+    flex: 1;
+}
+
+.color-preview {
+    width: 100%;
+    height: 60px;
+    border-radius: 4px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .company-nav-content {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .company-menu {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+    
+    .calculator-steps {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .color-picker-group {
+        flex-direction: column;
+    }
+}

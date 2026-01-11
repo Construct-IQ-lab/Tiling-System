@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Tiling System</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <nav class="admin-nav">
+        <div class="admin-nav-content">
+            <div class="admin-logo">
+                🏠 Tiling System Admin
+            </div>
+            <ul class="admin-menu">
+                <li><a href="index.html" class="active">Dashboard</a></li>
+                <li><a href="companies.html">Companies</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+            <div class="admin-user">
+                <span id="user-name">Admin</span>
+                <button class="btn btn-sm btn-secondary" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="admin-main">
+        <div class="page-header">
+            <h1 class="page-title">Dashboard</h1>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Companies</div>
+                <div class="stat-value" id="total-companies">-</div>
+            </div>
+            <div class="stat-card success">
+                <div class="stat-label">Total Projects</div>
+                <div class="stat-value" id="total-projects">-</div>
+            </div>
+            <div class="stat-card warning">
+                <div class="stat-label">Total Users</div>
+                <div class="stat-value" id="total-users">-</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Quick Actions</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <a href="companies.html" class="btn btn-primary" style="width: 100%;">Add New Company</a>
+                    </div>
+                    <div class="col-4">
+                        <a href="users.html" class="btn btn-primary" style="width: 100%;">Add New User</a>
+                    </div>
+                    <div class="col-4">
+                        <a href="reports.html" class="btn btn-secondary" style="width: 100%;">View Reports</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

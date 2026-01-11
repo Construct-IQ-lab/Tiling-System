@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes - Tiling System</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/company.css">
+</head>
+<body>
+    <nav class="company-nav">
+        <div class="company-nav-content">
+            <div class="company-branding">
+                <img id="company-logo" class="company-logo" src="" alt="Company Logo" style="display: none;">
+                <span class="company-name">Company Name</span>
+            </div>
+            <ul class="company-menu">
+                <li><a href="index.html" id="nav-dashboard">Dashboard</a></li>
+                <li><a href="projects.html" id="nav-projects">Projects</a></li>
+                <li><a href="calculator.html" id="nav-calculator">Calculator</a></li>
+                <li><a href="quotes.html" id="nav-quotes" class="active">Quotes</a></li>
+                <li><a href="profile.html" id="nav-profile">Profile</a></li>
+            </ul>
+            <div class="company-user">
+                <span id="user-name">User</span>
+                <button class="btn btn-sm btn-secondary" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="company-main">
+        <div class="page-header">
+            <h1 class="page-title">Quotes</h1>
+            <button class="btn btn-company-primary">New Quote</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">All Quotes</div>
+            <div class="card-body">
+                <p style="text-align: center; padding: 40px; color: #666;">
+                    Quote management interface will be displayed here.<br>
+                    Features: List quotes, create quotes, track status (draft/sent/approved/rejected),<br>
+                    link to projects, and manage client details.
+                </p>
+            </div>
+        </div>
+    </main>
+    
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/theme.js"></script>
+    <script>
+        // Initialize theme on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initTheme);
+        } else {
+            initTheme();
+        }
+    </script>
+</body>
+</html>
